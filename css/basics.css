@@ -3,3 +3,79 @@ label, select, input{
   display: inline-block;
   margin: 5px 0;
 }
+
+body{
+  background-image: url(http://www.maximumwall.com/wp-content/uploads/2015/07/fonds-ecran-ile-de-la-reunion-5.jpg);
+  background-size: cover;
+}
+
+h1{
+  text-align: center ;
+}
+
+table{
+  margin: auto;
+}
+
+form{
+  text-align: center ;
+
+}
+
+
+td{
+
+
+  border: black solid;
+  text-align: center;
+  font-family: "Times New Roman";
+}
+
+
+
+
+table{
+  font-size: 1.5em;
+}
+
+.mod{
+
+  animation: dd 5s infinite;
+}
+
+@keyframes dd {
+  0%{
+    color: black;
+
+  }
+  50%{color: green;
+  font-size:2em;}
+  100%{color: black;}
+}
+
+.supp {
+
+  background-color: blue;
+  color: white;
+  text-decoration: none;
+  border: solid black;
+
+}
+
+a{
+  color: white;
+}
+
+
+
+
+
+.supp:focus{
+  background-color: darkblue;
+  border: solid;
+  border: black solid;
+
+
+
+
+}

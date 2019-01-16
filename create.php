@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,7 +7,7 @@
 	<link rel="stylesheet" href="css/basics.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-	<a href="/php-pdo/read.php">Liste des données</a>
+	<a href="read.php">Liste des données</a>
 	<h1>Ajouter</h1>
 	<form action="" method="post">
 		<div>
@@ -31,7 +32,7 @@
 		</div>
 		<div>
 			<label for="duration">Durée</label>
-			<input type="duration" name="duration" value="">
+			<input type="text" name="duration" value="">
 		</div>
 		<div>
 			<label for="height_difference">Dénivelé</label>
@@ -41,3 +42,59 @@
 	</form>
 </body>
 </html>
+
+<?php
+
+$serverName = "localhost";
+$userName = "root";
+$password = "";
+$dbname = "reunion_island";
+
+$conn = new mysqli($serverName,$userName,$password);
+
+if($conn->connect_error){
+    die("connect failed: ".$conn->connect_error);
+}else{
+    $conn->select_db($dbname);
+}
+
+
+
+function creatrando()
+{
+    global $conn;
+
+    $name = (isset($_POST['name'])?$_POST['name']:NULL);
+    $name=filter_var($name, FILTER_SANITIZE_STRING);
+
+    $difficulty = (isset($_POST['difficulty'])?$_POST['difficulty']:NULL);
+    $difficulty =filter_var($difficulty, FILTER_SANITIZE_STRING);
+
+    $distance =(isset($_POST['distance'])?$_POST['distance']:NULL);
+    $distance = filter_var($distance, FILTER_SANITIZE_NUMBER_FLOAT);
+
+    $duration =(isset($_POST['duration'])?$_POST['duration']:NULL);
+    $duration = filter_var($duration, FILTER_SANITIZE_STRING);
+
+    $height_difference =(isset($_POST['height_difference'])?$_POST['height_difference']:NULL);
+    $height_difference =filter_var($height_difference, FILTER_SANITIZE_NUMBER_FLOAT);
+
+
+
+        $stmt = $conn->prepare("insert into `hiking` (`name`,`difficulty`,`distance`,`duration`,`height_difference`)
+                                values (?,?,?,?,?)");
+        $stmt->bind_param("ssisi",$name,$difficulty,$distance,$duration,$height_difference);
+        $stmt->execute();
+        $stmt -> close();
+
+    if($name && $difficulty && $duration && $distance && $height_difference == true ){
+        ?>
+        <div class="mod"> la randonées a été crée </div>
+        <?php
+    }
+
+}
+
+creatrando();
+
+?>
