@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 
 $serverName = "localhost";
 $userName = "root";
@@ -18,6 +20,8 @@ $sql ="select * from hiking";
 
 $result = $conn->query($sql);
 
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,8 +31,13 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="css/basics.css" media="screen" title="no title" charset="utf-8">
   </head>
   <body>
-    <h1>Les Ramdonées de l'île de la reunion</h1>
+  <?php
+  echo $_SESSION['username'];
+  echo"test";
+  ?>
+      <h1>Les Ramdonées de l'île de la reunion</h1>
     <a href="create.php">creer une nouvelle randonée</a>
+      <a href="logout.php">deconnection</a>
     <table>
         <tr>
             <th>Nom des ramdonnées</th>
@@ -40,6 +49,8 @@ $result = $conn->query($sql);
             <th>Deniveler</th>
         </tr>
         <?php
+
+
         while($donnees = $result->fetch_assoc()) {
 
 
